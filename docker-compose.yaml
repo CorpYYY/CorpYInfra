@@ -19,3 +19,16 @@ services:
       - MINIO_ROOT_USER=user
       - MINIO_ROOT_PASSWORD=password
     command: server --console-address :9001 /data
+    
+  createbuckets:
+    image: minio/mc
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+      sleep 10;
+      /usr/bin/mc config host add minio http://minio:9000 user password;
+      /usr/bin/mc mb minio/corpbucket;
+      /usr/bin/mc anonymous set public minio/corpbucket;
+      exit 0;
+      "
