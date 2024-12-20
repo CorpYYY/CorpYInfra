@@ -8,6 +8,10 @@ services:
       - POSTGRES_DB=postgres
     ports:
       - '5432:5432'
+  master_redis:
+    image: redis:latest
+    ports:
+      - "6379:6379" 
   minio:
     image: minio/minio
     ports:
@@ -19,7 +23,6 @@ services:
       - MINIO_ROOT_USER=user
       - MINIO_ROOT_PASSWORD=password
     command: server --console-address :9001 /data
-    
   createbuckets:
     image: minio/mc
     depends_on:
