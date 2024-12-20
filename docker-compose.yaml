@@ -35,3 +35,4 @@ services:
       /usr/bin/mc anonymous set public minio/corpbucket;
       exit 0;
       "
+      
